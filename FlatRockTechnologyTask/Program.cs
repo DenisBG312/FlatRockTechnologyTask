@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -11,7 +12,10 @@ namespace FlatRockTechnologyTask
     {
         static void Main(string[] args)
         {
-            var html = File.ReadAllText("index.html");
+            var projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            var htmlPath = Path.Combine(projectRoot, "index.html");
+            var html = File.ReadAllText(htmlPath);
+
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
@@ -49,7 +53,7 @@ namespace FlatRockTechnologyTask
             {
                 WriteIndented = true,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             });
 
             Console.WriteLine(jsonOutput);
