@@ -26,7 +26,7 @@ namespace FlatRockTechnologyTask
             foreach (var element in elements)
             {
                 var imgNode = element.SelectSingleNode(".//img");
-                var productName = HttpUtility.HtmlDecode(imgNode?.GetAttributeValue("alt", "").Trim());
+                var productName = HttpUtility.HtmlDecode(imgNode?.GetAttributeValue("alt", ""));
 
                 var priceNode = element.SelectSingleNode(".//span[@class='price-display formatted']");
                 var priceText = priceNode?.SelectSingleNode(".//span[@style='display: none']")?.InnerText;
